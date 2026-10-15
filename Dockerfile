@@ -6,6 +6,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /teardown-rp
 
 FROM scratch
 COPY --from=builder /passwd /etc/passwd
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /teardown-rpc /teardown-rpc
 EXPOSE 8545
 USER nonroot
